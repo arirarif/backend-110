@@ -1,8 +1,10 @@
+require('dotenv').config()
 const express = require('express')
 const swaggerUI = require('swagger-ui-express')
 const YAML = require('yamljs')
 const swaggerDoc = YAML.load('./swagger.yaml.yaml')
 
+require('./db')
 
 // express app
 
@@ -20,6 +22,23 @@ app.get('./health', (_req, res) =>{
 })
 
 app.get('/api/v1/articles', (req, res) =>{
+    // 1. find queries/ extract query parmas
+    const page = +req.query.page || 1
+    const limit = +req.query.limit || 10
+    const sortType = req.query.sortType || 'asc'
+    const sortBy = req.query.sortBy || 'updatedAt'
+    const searchTerm = req.query.searchTerm || ''
+
+    // console.log('Query params', req.query);
+    // console.log('Default parmas', {page, limit, sortType, sortBy, searchTerm});
+
+
+    // 2. call articles service to fatch all articles 
+
+    
+
+    // 3. generate neccessary response
+    // 4. 
     res.status(200).json({path: '/articles', method: 'get'})
 })
 
