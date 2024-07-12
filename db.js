@@ -9,12 +9,12 @@ class DatabaseConnection {
         this.dbURL = path.resolve(process.env.DB_URL)
     }
 
-    async readDB(){
+    async read(){
         const dbStr = await fs.readFile(this.dbURL, {encoding: 'utf-8'})
         this.db = JSON.parse(dbStr)
     }
 
-    async writeDB() {
+    async write() {
         if (this.db){
             this.db = await fs.writeFile(this.dbURL, JSON.stringify(this.db))
         }
@@ -23,7 +23,7 @@ class DatabaseConnection {
         if(this.db){
             return this.db
         }
-        await this.readDB()
+        await this.read()
         return this.db
     }
 }
@@ -31,6 +31,10 @@ class DatabaseConnection {
 const main =async () => {
     const dbConnection = new DatabaseConnection()
     const db = await dbConnection.getDB()
+
+    db.users.push('kaiser')
+    db.users.push('Mofij')
+    dbConnection.write()
 
     console.log('Database');
     console.log(db);
