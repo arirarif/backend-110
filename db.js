@@ -4,9 +4,9 @@ const path = require('path')
 
 
 class DatabaseConnection {
-    constructor(){
+    constructor(dbURL){
         this.db = null
-        this.dbURL = path.resolve(process.env.DB_URL)
+        this.dbURL = dbURL
     }
 
     async read(){
@@ -40,4 +40,10 @@ const main =async () => {
     console.log(db);
 }
 
-main()
+const connection  = new DatabaseConnection(path.resolve(process.env.DB_URL))
+// module.exports = {
+//     db: connection.getDB,
+//     write: connection.write
+// }
+
+module.exports = connection
