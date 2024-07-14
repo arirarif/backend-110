@@ -1,1 +1,57 @@
-{"users":["Ariful Islam","kaiser","Mofij"],"articles":["First Article"],"comments":["First Comment"]}
+{
+"users":[],
+"articles":[
+
+    {
+        "id": 1,
+        "authorId": 1,
+        "title": "First Article",
+        "body": "Body of the first article",
+        "status": "publish",
+        "createdAt": "2024-07-14T11:00:12.145Z",
+        "updatedAt": "2024-07-14T11:00:12.145Z"
+    },
+
+    {
+        "id": 2,
+        "authorId": 2,
+        "title": "2nd Article",
+        "body": "Body of the first article",
+        "status": "publish",
+        "createdAt": "2024-07-14T11:00:12.145Z",
+        "updatedAt": "2024-07-14T11:00:12.145Z"
+    },
+    
+    {
+        "id": 3,
+        "authorId": 3,
+        "title": "3rd Article",
+        "body": "Body of the first article",
+        "status": "publish",
+        "createdAt": "2024-07-14T11:00:12.145Z",
+        "updatedAt": "2024-07-14T11:00:12.145Z"
+    },
+    
+    {
+        "id": 4,
+        "authorId": 4,
+        "title": "4rth Article",
+        "body": "Body of the first article",
+        "status": "publish",
+        "createdAt": "2024-07-14T11:00:12.145Z",
+        "updatedAt": "2024-07-14T11:00:12.145Z"
+    },
+    
+    {
+        "id": 5,
+        "authorId": 5,
+        "title": "5th Article",
+        "body": "Body of the first article",
+        "status": "publish",
+        "createdAt": "2024-07-14T11:00:12.145Z",
+        "updatedAt": "2024-07-14T11:00:12.145Z"
+    }
+    
+],
+"comments":[]
+}

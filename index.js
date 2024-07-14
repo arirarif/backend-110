@@ -21,7 +21,7 @@ app.get('./health', (_req, res) =>{
     })
 })
 
-app.get('/api/v1/articles', (req, res) =>{
+app.get('/api/v1/articles', async (req, res) =>{
     // 1. find queries/ extract query parmas
     const page = +req.query.page || 1
     const limit = +req.query.limit || 10
@@ -34,12 +34,46 @@ app.get('/api/v1/articles', (req, res) =>{
 
 
     // 2. call articles service to fatch all articles 
+    const db = await connection.getDB()
+    let articles = db.articles
 
-    
+
 
     // 3. generate neccessary response
-    // 4. 
-    res.status(200).json({path: '/articles', method: 'get'})
+
+    const transformedArticles = articles.map(article => {
+        const transformed = { ...article }
+        transformed.author = {
+            id: transformed.authorId
+            // TODO: find author name
+        }
+        transformed.link = `/article/${transformed.id}`
+
+
+        delete transformed.body
+        delete transformed.authorId
+
+        return transformed
+    })
+
+    const response = {
+        data: transformedArticles,
+        "pagination": {
+            page,
+            limit,
+            "next": 3,
+            "prev": 1,
+            "totalPage": Math.ceil( articles.length / limit ),
+            "totalItems": articles.length
+        },
+        links: {
+            self: req.url,
+            next: `/articles?page=${page+1}&limit${limit}`,
+            prev: `/articles?page=${page-1}&limit${limit}`,
+
+        }
+    }
+    res.status(200).json(response)
 })
 
 app.post('/api/v1/articles', (req, res) =>{
